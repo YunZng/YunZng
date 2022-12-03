@@ -1,4 +1,4 @@
-- 👋 Hi, I’m @YunZng or Yulun Zeng
+- 👋 Hi, I’m Yulun Zeng or YunZng
 - 👀 I’m interested in LEARNING and APPLYING EVERYTHING!! But my priority is C/C++, Java, Python, PHP, Perl, JavaScript HTML CSS.
 - 🌱 I’m currently learning Operating System and Compiler Design
 - 🤓 I’m looking to gain experience from any source to grow my knowledge
