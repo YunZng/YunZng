@@ -1,51 +1,84 @@
-name: Deploy
+name: Deploy Vite app to GitHub Pages
 
 on:
   push:
     branches:
       - main
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: install pnpm
-        uses: pnpm/action-setup@v2
+      - name: Detect package manager
+        id: detect-package-manager
+        run: |
+          if [ -f "${{ github.workspace }}/pnpm-lock.yaml" ]; then
+            echo "::set-output name=manager::pnpm"
+            echo "::set-output name=command::install"
+            echo "::set-output name=runner::pnpx --no-install"
+            exit 0
+          elif [ -f "${{ github.workspace }}/yarn.lock" ]; then
+            echo "::set-output name=manager::yarn"
+            echo "::set-output name=command::install"
+            echo "::set-output name=runner::yarn"
+            exit 0
+          elif [ -f "${{ github.workspace }}/package-lock.json" ]; then
+            echo "::set-output name=manager::npm"
+            echo "::set-output name=command::ci"
+            echo "::set-output name=runner::npx --no-install"
+            exit 0
+          else
+            echo "Unable to determine package manager"
+            exit 1
+          fi
+
+      - name: Install pnpm
+        if: steps.detect-package-manager.outputs.manager == 'pnpm'
+        run: npm install -g pnpm
+
+      - name: Install yarn
+        if: steps.detect-package-manager.outputs.manager == 'yarn'
+        run: npm install -g yarn
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          version: 8
+          node-version: "16"
+          cache: ${{ steps.detect-package-manager.outputs.manager }}
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
 
       - name: Install dependencies
-        uses: pnpm install
+        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
-      - name: Build project
-        run: pnpm build
+      - name: Build with Vite
+        run: ${{ steps.detect-package-manager.outputs.manager }} run build
 
-      - name: Upload production-ready build files
-        uses: actions/upload-artifact@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          name: production-files
           path: ./dist
 
   deploy:
-    name: Deploy
-    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
+    needs: build
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: production-files
-          path: ./dist
-
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+        id: deployment
+        uses: actions/deploy-pages@v1
