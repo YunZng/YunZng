@@ -1,0 +1,1 @@
+export const skills = ['Python', 'Travis', 'Kubernetes', 'Tekton', 'SFDX', 'Agile', 'JavaScript', 'Java', 'Android Studio', 'C/C++', 'Linux', 'API', 'Object Oriented Programming', 'React']
