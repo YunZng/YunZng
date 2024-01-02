@@ -1,4 +1,4 @@
-import { skills } from "./assets/data";
+import { skills } from "../../assets/data";
 import { Badge } from "@/components/ui/badge"
 
 export default function Skills() {
