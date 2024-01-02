@@ -6,6 +6,7 @@ export default function Skills() {
     <div className="flex flex-wrap justify-center gap-3 p-2">
       {skills.map((skill) => (
         <Badge
+          key={skill}
           variant="outline"
           className="hover:scale-105 transform transition duration-200 text-indigo-200"
         >
