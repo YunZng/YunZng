@@ -1,77 +1,63 @@
-import { AspectRatio } from "../ui/aspect-ratio";
 import { Badge } from "../ui/badge";
 import { Separator } from "../ui/separator";
+import { education } from "@/assets/data";
 
-export default function Education() {
-  const jhuCourses = [
-    "Operating System",
-    "Compilers & Interpreters",
-    "Information Retrieval and Web Agents",
-    "Principles of Programming Languages",
-    "User Interfaces and Mobile Applications",
-    "Introduction to Human-Computer Interaction",
-    "Artificial Intelligence",
-    "Full-Stack Javascript",
-  ];
-  const jhuAwards = ["JHU Grant 2022", "Hopkins Scholarship 2023"];
+export default function Education({ education }: { education: education }) {
   return (
-    // first school
     <div className="pt-8">
       <div className="grid grid-cols-3 gap-4">
-        <div className="border-2 border-indigo-200 rounded-lg hover:shadow-lg hover:scale-105 transform transition duration-200">
-          <AspectRatio>
-            <img
-              className="rounded-lg object-cover w-full h-full absolute"
-              src="jhu.jpeg"
-            />
-          </AspectRatio>
+        <div className="border-2 border-indigo-200 rounded-lg hover:shadow-lg hover:scale-105 transform transition duration-200 w-72 h-72 justify-self-center">
+          <img
+            className="rounded-lg object-cover absolute w-full h-full"
+            src={education.img}
+          />
         </div>
         <div className="col-span-2">
-          <h1 className="text-5xl pb-2">Johns Hopkins University</h1>
-          <Separator/>
+          <h1 className="text-5xl pb-2">{education.name}</h1>
+          <Separator />
           <ul className="pt-2">
             <li>
-              <b>Location</b>: Baltimore, MD
+              <b>Major</b>: {education.major}
             </li>
             <li>
-              <b>Date attended</b>: Aug 2022 - Current
+              <b>Degree</b>: {education.degree}
             </li>
             <li>
-              <b>Major</b>: Computer Science
+              <b>GPA</b>: {education.gpa}
             </li>
             <li>
-              <b>Degree</b>: Bachelor & Master (WIP)
+              <b>Date attended</b>: {education.date}
             </li>
             <li className="flex flex-wrap">
               <b>Key Courses</b>:
-              {jhuCourses.map((jhuCourse) => (
+              {education.courses.map((course) => (
                 <div className="pl-1">
                   <Badge
-                    key={jhuCourse}
+                    key={course}
                     variant="outline"
                     className="hover:scale-105 transform transition duration-200 text-indigo-200"
                   >
-                    {jhuCourse}
+                    {course}
                   </Badge>
                 </div>
               ))}
             </li>
             <li className="flex flex-wrap">
               <b>Achievements and Honors</b>:
-              {jhuAwards.map((jhuAward) => (
+              {education.award.map((award) => (
                 <div className="pl-1">
                   <Badge
-                    key={jhuAward}
+                    key={award}
                     variant="outline"
                     className="hover:scale-105 transform transition duration-200 text-indigo-200"
                   >
-                    {jhuAward}
+                    {award}
                   </Badge>
                 </div>
               ))}
             </li>
             <li>
-              <b>GPA</b>: 3.84/4.00
+              <b>Location</b>: {education.location}
             </li>
           </ul>
         </div>
