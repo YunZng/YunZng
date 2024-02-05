@@ -88,3 +88,34 @@
 body {
   overscroll-behavior: none;
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.scroll-text {
+  animation: scroll 40s linear infinite;
+}
+
+@keyframes scroll-inverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.scroll-text-inverse {
+  animation: scroll-inverse 40s linear infinite;
+}
+
+/* Tailwind doesn't directly support tilted elements through utility classes, so you might need to define a custom class or inline style for tilting */
+.tilted {
+  transform: rotate(-15deg);
+}

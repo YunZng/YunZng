@@ -1,7 +1,6 @@
-export default function Others(){
-    return(
-        <div>
-            {/* <Avatar/> */}
-        </div>
-    )
+export default function Others() {
+  return (
+    <div className="flex justify-center border-2">
+    </div>
+  );
 }

@@ -1,4 +1,4 @@
-import Educations from "@/components/content/Educations";
+import Education from "@/components/content/Education";
 import Experience from "@/components/content/Experience";
 import Others from "@/components/content/Others";
 import Personal from "@/components/content/Personal";
@@ -21,7 +21,7 @@ export const skills = [
 ];
 
 export const menuItems: any = {
-  Education: <Educations />,
+  Education: <Education />,
   Experience: <Experience />,
   Personal: <Personal />,
   Others: <Others />,
@@ -56,7 +56,7 @@ const jhu: education = {
   location: "Baltimore, MD",
   date: "Aug 2022 - Current",
   major: "Computer Science",
-  degree: "Bachelor & Master (WIP)",
+  degree: "Bachelor(2024) & Master(WIP 2025)",
   gpa: "3.84/4.00",
 };
 
