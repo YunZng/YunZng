@@ -8,7 +8,7 @@ export default function Background() {
     </div>
   );
   return (
-    <div className="absolute w-screen h-screen overflow-hidden bg-slate-900">
+    <div className="absolute w-screen h-screen overflow-hidden bg-slate-800">
       <div className="absolute tilted top-[-22vw] left-[-10vw]">
         {[...Array(30).keys()].map((pos) => (
           <div className="border-2 border-slate-700 p-1">
@@ -16,7 +16,7 @@ export default function Background() {
               <div
                 className={`flex scroll-text${
                   pos % 2 == 0 ? "" : "-inverse"
-                } text-slate-500	`}
+                } text-slate-700`}
               >
                 {[...Array(20).keys()].map((x) => carouselItem(x))}
                 {[...Array(20).keys()].map((x) => carouselItem(x))}

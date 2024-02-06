@@ -1,7 +1,6 @@
 import Avatar from "../header/Avatar";
 import Bio from "../header/Bio";
 import { Card } from "../ui/card";
-import { Separator } from "../ui/separator";
 
 export default function Header() {
   return (
@@ -10,7 +9,6 @@ export default function Header() {
         <Avatar />
         <Bio />
       </Card>
-      <Separator orientation="vertical" />
     </div>
   );
 }
